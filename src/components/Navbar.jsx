@@ -1,7 +1,31 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router';
 
 const Navbar = () => {
+    const [isScroll, setIsScroll] = useState(false);
+    const [isHome, setIsHome] = useState(true);
+    const location = useLocation();
+
+    useEffect(()=> {
+        const pathname = location.pathname;
+        if(pathname === '/'){
+            setIsHome(true);
+        }else{
+            setIsHome(false);
+        }
+    }, [location]);
+
+    useEffect(()=> {
+        window.addEventListener('scroll', ()=> {
+            const scroll = window.scrollY;
+            if(scroll > 0){
+                setIsScroll(true);
+            }else{
+                setIsScroll(false);
+            }
+        })
+    }, [isScroll])
+
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/all-property'}>All Property</NavLink></li>
@@ -9,7 +33,7 @@ const Navbar = () => {
         <li><NavLink to={'/my-ratings'}>My Ratings</NavLink></li>
     </>
     return (
-        <nav className='shadow-sm bg-base-100'>
+        <nav className={`${isHome ? 'fixed top-0 left-0 w-full z-50 text-white' : 'static text-black'} py-2 shadow-sm ${isScroll ? 'bg-base-100 text-black!' : 'bg-transparent'}`}>
             <div className="w-11/12 mx-auto navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -18,7 +42,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className={`menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ${scroll && 'text-black'}`}>
                         {links}
                     </ul>
                     </div>
@@ -40,7 +64,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className={`${scroll && 'text-black'} menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow`}>
                             <li>
                             <a className="justify-between">
                                 Profile
@@ -51,7 +75,7 @@ const Navbar = () => {
                             <li><a>Logout</a></li>
                         </ul>
                     </div>
-                    <Link to='/login' className="btn">Login</Link>
+                    <Link to='/login' className="btn btn-primary">Login</Link>
                 </div>
             </div>
         </nav>
