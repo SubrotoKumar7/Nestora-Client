@@ -1,4 +1,3 @@
-// WhyChooseUs.jsx
 import React from "react";
 
 const features = [
