@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import AllProperty from "../pages/AllProperty";
 import AddProperty from "../pages/AddProperty";
 import MyRatings from "../pages/MyRatings";
+import Details from "../pages/Details";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home
+                Component: Home,
+                loader: ()=> fetch('/properties.json')
             },
             {
                 path: 'login',
@@ -35,6 +37,11 @@ const router = createBrowserRouter([
             {
                 path: 'my-ratings',
                 element: <MyRatings></MyRatings>
+            },
+            {
+                path: 'details/:id',
+                loader: ({params})=> fetch(`/properties.json/${params.id}`),
+                Component: Details
             }
         ]
     }
