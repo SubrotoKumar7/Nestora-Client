@@ -4,9 +4,9 @@ import { Link, NavLink } from 'react-router';
 const Navbar = () => {
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/'}>All Property</NavLink></li>
-        <li><NavLink to={'/'}>Add Property</NavLink></li>
-        <li><NavLink to={'/'}>My Ratings</NavLink></li>
+        <li><NavLink to={'/all-property'}>All Property</NavLink></li>
+        <li><NavLink to={'/add-property'}>Add Property</NavLink></li>
+        <li><NavLink to={'/my-ratings'}>My Ratings</NavLink></li>
     </>
     return (
         <nav className='shadow-sm bg-base-100'>
