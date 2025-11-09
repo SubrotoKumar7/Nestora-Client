@@ -4,6 +4,7 @@ import Latest from '../components/Latest';
 import { useLoaderData } from 'react-router';
 import ChooseUs from '../components/ChooseUs';
 import Testimonial from '../components/Testimonial';
+import OurExperts from '../components/OurExperts';
 
 const Home = () => {
     const propertiesData = useLoaderData();
@@ -13,6 +14,7 @@ const Home = () => {
             <Latest propertiesData={propertiesData}></Latest>
             <ChooseUs></ChooseUs>
             <Testimonial></Testimonial>
+            <OurExperts></OurExperts>
         </div>
     );
 };
