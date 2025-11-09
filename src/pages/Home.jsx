@@ -8,7 +8,7 @@ import Testimonial from '../components/Testimonial';
 const Home = () => {
     const propertiesData = useLoaderData();
     return (
-        <div className='absolute top-0 w-full h-full'>
+        <div>
             <Carousel></Carousel>
             <Latest propertiesData={propertiesData}></Latest>
             <ChooseUs></ChooseUs>

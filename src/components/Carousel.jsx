@@ -32,7 +32,7 @@ const sliderData = [
 
     
     return (
-        <div>
+        <div className='relative h-screen'>
             <Swiper autoplay={{delay: 3000}} speed={1000} loop effect='fade'  modules={[Autoplay]}>
                 {
                     sliderData.map(slide => 
