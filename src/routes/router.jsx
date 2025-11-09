@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'details/:id',
-                loader: ({params})=> fetch(`/properties.json/${params.id}`),
+                loader: () => fetch('/properties.json'),
                 Component: Details
             }
         ]
