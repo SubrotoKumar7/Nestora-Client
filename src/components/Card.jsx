@@ -19,7 +19,7 @@ const Card = ({property}) => {
                 <p className='flex items-center gap-2'><FaLocationDot /> {location}</p>
                 <p className='flex items-center gap-2'><FaCalendarAlt /> {createdAt}</p>
                 <p>{description.slice(0, 70)} ...</p>
-                <Link className='btn btn-primary w-full' to={`details/${id}`}>Learn More</Link>
+                <Link className='btn btn-primary w-full' to={`/details/${id}`}>Learn More</Link>
             </div>
         </div>
     );

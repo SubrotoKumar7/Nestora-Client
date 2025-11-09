@@ -6,8 +6,10 @@ const Latest = ({propertiesData}) => {
     const data = propertiesData.slice(0, 6);
     return (
         <div className='sec-gap w-11/12 mx-auto'>
-            <h1 className='heading text-center text-primary'>Featured Real Estates</h1>
-            <p className='text-secondary text-center mt-3'>Explore the latest properties added this week</p>
+            <div className='text-center space-y-2 mb-10'>
+                <h1 className='heading text-primary'>Featured Real Estates</h1>
+                <p className='text-secondary mt-3'>Explore the latest properties added this week</p>
+            </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
                 {
                     data.map(property => <Card key={property.id} property={property}></Card>)  

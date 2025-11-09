@@ -28,6 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'all-property',
+                loader: () => fetch('/properties.json'),
                 Component: AllProperty
             },
             {
