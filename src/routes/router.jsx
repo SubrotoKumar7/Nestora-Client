@@ -7,6 +7,7 @@ import AllProperty from "../pages/AllProperty";
 import AddProperty from "../pages/AddProperty";
 import MyRatings from "../pages/MyRatings";
 import Details from "../pages/Details";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
                 Component: Details
             }
         ]
+    },
+    {
+        path: '*',
+        Component: NotFound
     }
 ])
 
