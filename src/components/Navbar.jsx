@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
+import useAuth from '../hooks/useAuth';
+import { toast } from 'react-toastify';
+import MiniLoader from './MiniLoader';
 
 const Navbar = () => {
     const [isScroll, setIsScroll] = useState(false);
     const [isHome, setIsHome] = useState(true);
     const location = useLocation();
+
+    const {user, logOutUser, loading} = useAuth();
+
+    const handleLogout = () => {
+        logOutUser()
+        .then(()=> {
+            toast.success('Logout successful');
+        })
+        .catch(err => {
+            toast.warn(err.message);
+        })
+    }
 
     useEffect(()=> {
         const pathname = location.pathname;
@@ -29,8 +44,14 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/all-property'}>All Property</NavLink></li>
-        <li><NavLink to={'/add-property'}>Add Property</NavLink></li>
-        <li><NavLink to={'/my-ratings'}>My Ratings</NavLink></li>
+        {
+            user &&
+            <>
+                <li><NavLink to={'/my-property'}>My Property</NavLink></li>
+                <li><NavLink to={'/add-property'}>Add Property</NavLink></li>
+                <li><NavLink to={'/my-ratings'}>My Ratings</NavLink></li>
+            </>
+        }
     </>
     return (
         <nav className={`${isHome ? 'fixed top-0 left-0 w-full z-50 text-white' : 'static text-black'} py-2 shadow-sm ${isScroll ? 'bg-base-100 text-black!' : 'bg-transparent'}`}>
@@ -54,28 +75,36 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end flex items-center gap-3">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    {
+                        user 
+                        &&
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                <img
+                                    alt="Tailwind CSS Navbar component"
+                                    src={user?.photoURL} />
+                                </div>
                             </div>
+                            <ul
+                                tabIndex="-1"
+                                className={`${scroll && 'text-black'} text-center menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow`}>
+                                <li className='font-semibold py-1'>{user?.displayName}</li>
+                                <li className='pb-3 italic'>{user?.email}</li>
+                                <li><button className='btn btn-secondary' onClick={handleLogout}>Logout</button></li>
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex="-1"
-                            className={`${scroll && 'text-black'} menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow`}>
-                            <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
+                    }
+                    <div>
+                        {   loading ?
+                            <MiniLoader></MiniLoader>
+                            :
+                            user ?
+                            <button className='btn btn-secondary' onClick={handleLogout}>Logout</button>
+                            :
+                            <Link to='/login' className="btn btn-primary">Login</Link>
+                        }
                     </div>
-                    <Link to='/login' className="btn btn-primary">Login</Link>
                 </div>
             </div>
         </nav>

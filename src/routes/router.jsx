@@ -8,6 +8,7 @@ import AddProperty from "../pages/AddProperty";
 import MyRatings from "../pages/MyRatings";
 import Details from "../pages/Details";
 import NotFound from "../pages/NotFound";
+import MyProperty from "../pages/MyProperty";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
                 path: 'details/:id',
                 loader: () => fetch('/properties.json'),
                 Component: Details
+            },
+            {
+                path: 'my-property',
+                Component: MyProperty
             }
         ]
     },
