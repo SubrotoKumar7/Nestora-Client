@@ -45,6 +45,7 @@ const Register = () => {
         .then(() => {
             updateInfo(info)
             .then(()=> {
+                e.target.reset();
                 setError('');
                 toast.success("Account created successful");
                 navigate('/');
