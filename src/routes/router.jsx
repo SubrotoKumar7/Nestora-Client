@@ -20,14 +20,6 @@ const router = createBrowserRouter([
                 loader: ()=> fetch('/properties.json')
             },
             {
-                path: 'login',
-                Component: Login
-            },
-            {
-                path: 'register',
-                Component: Register
-            },
-            {
                 path: 'all-property',
                 loader: () => fetch('/properties.json'),
                 Component: AllProperty
@@ -50,7 +42,16 @@ const router = createBrowserRouter([
     {
         path: '*',
         Component: NotFound
+    },
+    {
+        path: 'login',
+        Component: Login
+    },
+    {
+        path: 'register',
+        Component: Register
     }
+
 ])
 
 export default router;
