@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 
@@ -9,6 +9,7 @@ const Login = () => {
     const {loginUser, loginWithGoogle} = useAuth();
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState('');
@@ -24,7 +25,7 @@ const Login = () => {
             e.target.reset();
             setError('');
             toast.success('Login successful');
-            navigate('/');
+            navigate(`${location.state ? location.state : '/'}`);
         })
         .catch(err => {
             setError(err.message);
@@ -37,7 +38,7 @@ const Login = () => {
         .then(()=> {
             setError('');
             toast.success("Login successful");
-            navigate('/');
+            navigate(`${location.state ? location.state : '/'}`);
         })
         .catch(err => {
             setError(err.message);
