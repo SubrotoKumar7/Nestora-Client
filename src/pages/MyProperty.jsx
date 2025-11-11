@@ -59,7 +59,7 @@ const MyProperties = () => {
                             <Link to={`/details/${property.id}`} className="btn btn-sm  btn-secondary text-white hover:underline text-sm">View Details</Link>
 
                             <div className="flex space-x-2">
-                                <button className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</button>
+                                <Link to={`/update/${property.id}`} className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</Link>
                                 <button className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ import Details from "../pages/Details";
 import NotFound from "../pages/NotFound";
 import MyProperty from "../pages/MyProperty";
 import Private from "../private/Private";
+import UpdateProperty from "../pages/UpdateProperty";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-property',
                 element: <Private><MyProperty></MyProperty></Private>
+            },
+            {
+                path: 'update/:id',
+                element: <Private><UpdateProperty></UpdateProperty></Private>
             }
         ]
     },
