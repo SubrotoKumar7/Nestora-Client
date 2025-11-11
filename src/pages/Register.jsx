@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const Register = () => {
 
     const { createUser, loginWithGoogle, updateInfo } = useAuth();
+
+    const location = useLocation();
 
     const navigate = useNavigate();
 
@@ -48,7 +50,7 @@ const Register = () => {
                 e.target.reset();
                 setError('');
                 toast.success("Account created successful");
-                navigate('/');
+                navigate(`${location.state ? location.state : '/'}`);
             })
             .catch(err => {
                 setError(err.message);
@@ -64,7 +66,7 @@ const Register = () => {
         .then(()=> {
             setError('');
             toast.success("Account created successful");
-            navigate('/');
+            navigate(`${location.state ? location.state : '/'}`);
         })
         .catch(err => {
             setError(err.message);
@@ -113,7 +115,6 @@ const Register = () => {
                             Register with Google
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
