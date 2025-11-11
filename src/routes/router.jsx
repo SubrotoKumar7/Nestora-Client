@@ -11,6 +11,7 @@ import NotFound from "../pages/NotFound";
 import MyProperty from "../pages/MyProperty";
 import Private from "../private/Private";
 import UpdateProperty from "../pages/UpdateProperty";
+import Loader from "../components/Loader";
 
 const router = createBrowserRouter([
     {
@@ -20,11 +21,13 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home,
-                loader: ()=> fetch('/properties.json')
+                loader: ()=> fetch('/properties.json'),
+                hydrateFallbackElement: <Loader></Loader>
             },
             {
                 path: 'all-property',
                 loader: () => fetch('/properties.json'),
+                hydrateFallbackElement: <Loader></Loader>,
                 Component: AllProperty
             },
             {
@@ -38,6 +41,7 @@ const router = createBrowserRouter([
             {
                 path: 'details/:id',
                 loader: () => fetch('/properties.json'),
+                hydrateFallbackElement: <Loader></Loader>,
                 element: <Private><Details></Details></Private>
             },
             {
