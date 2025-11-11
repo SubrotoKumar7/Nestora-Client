@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Loader = () => {
     return (
-        <div className='py-[20vh]'>
+        <div className='w-full h-[80vh] grid place-items-center'>
             <StyledWrapper>
             <svg aria-label="loader being flipped clockwise and circled by three white curves fading in and out" role="img" height="56px" width="56px" viewBox="0 0 56 56" className="loader">
                 <clipPath id="sand-mound-top">
