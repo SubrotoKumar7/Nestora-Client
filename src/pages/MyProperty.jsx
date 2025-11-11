@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const fakeProperties = [
     {
@@ -37,6 +38,27 @@ const fakeProperties = [
 ];
 
 const MyProperties = () => {
+
+    const handleRemove = () => {
+        Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+            });
+        }
+        });
+    }
+
     return (
         <div className="w-11/12 mx-auto sec-gap">
             <div className='text-center space-y-2 mb-10'>
@@ -60,7 +82,7 @@ const MyProperties = () => {
 
                             <div className="flex space-x-2">
                                 <Link to={`/update/${property.id}`} className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</Link>
-                                <button className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
+                                <button onClick={handleRemove} className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
                             </div>
                         </div>
                     </div>
