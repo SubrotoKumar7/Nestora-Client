@@ -1,6 +1,9 @@
-import React from 'react';
+import { Rating } from '@smastrom/react-rating';
+import React, { useState } from 'react';
 
 const MyRatings = () => {
+
+    const [rating, setRating] = useState(4)
 
     return (
         <div className='w-11/12 mx-auto sec-gap'>
@@ -16,9 +19,10 @@ const MyRatings = () => {
                             <p className='text-gray-500'>Reviewed by <span>John Doe</span></p>
                             <div className='py-2'>
                                {/* rating */}
+                                <Rating style={{ maxWidth: 100 }} value={rating} onChange={setRating} />
                             </div>
                             <p> Wake up to the sound of the river and enjoy sunset views from your private balcony. This 2-story home offers open living spaces, a rooftop terrace, and large windows for natural light.</p>
-                            <p className='text-gray-500 py-2'>8/11/2025</p>
+                            <p className='text-gray-500 py-2 text-sm'>8/11/2025</p>
                         </div>
                     </div>
             </div>
