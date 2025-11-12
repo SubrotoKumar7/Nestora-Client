@@ -21,12 +21,12 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home,
-                loader: ()=> fetch('/properties.json'),
+                loader: ()=> fetch('http://localhost:3000/latest-properties'),
                 hydrateFallbackElement: <Loader></Loader>
             },
             {
                 path: 'all-property',
-                loader: () => fetch('/properties.json'),
+                loader: () => fetch('http://localhost:3000/properties'),
                 hydrateFallbackElement: <Loader></Loader>,
                 Component: AllProperty
             },
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'details/:id',
-                loader: () => fetch('/properties.json'),
+                loader: ({params}) => fetch(`http://localhost:3000/properties/${params.id}`),
                 hydrateFallbackElement: <Loader></Loader>,
                 element: <Private><Details></Details></Private>
             },

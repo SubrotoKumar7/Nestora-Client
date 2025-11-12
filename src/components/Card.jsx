@@ -5,7 +5,7 @@ import { TbCurrencyTaka } from 'react-icons/tb';
 import { Link } from 'react-router';
 
 const Card = ({property}) => {
-    const {id, category, createdAt, description, image, location, name, price} = property;
+    const {_id, category, createdAt, description, image, location, name, price} = property;
     return (
         <div className='p-2 bg-white shadow-2xl rounded hover:scale-105'>
             <img src={image} alt="property images" />
@@ -19,7 +19,7 @@ const Card = ({property}) => {
                 <p className='flex items-center gap-2'><FaLocationDot /> {location}</p>
                 <p className='flex items-center gap-2'><FaCalendarAlt /> {createdAt}</p>
                 <p>{description.slice(0, 70)} ...</p>
-                <Link className='btn btn-primary w-full' to={`/details/${id}`}>Learn More</Link>
+                <Link className='btn btn-primary w-full' to={`/details/${_id}`}>Learn More</Link>
             </div>
         </div>
     );

@@ -1,11 +1,9 @@
 import React from 'react';
-import { useLoaderData, useParams } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 const Details = () => {
     const properties = useLoaderData();
-    const param = useParams();
-    const filterData = properties.find(property => property.id == param.id);
-    const {agentContact, agentEmail, agentImage, agentName, category, createdAt, description, furnishing, image, location, name, price, propertyType, rating, status, yearBuilt } = filterData;
+    const {agentContact, agentEmail, agentImage, agentName, category, createdAt, description, furnishing, image, location, name, price, propertyType, rating, status, yearBuilt } = properties;
     return (
         <div className='w-11/12 mx-auto sec-gap'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
