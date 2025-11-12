@@ -1,43 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
+import Loader from "../components/Loader";
 
-const fakeProperties = [
-    {
-        id: 1,
-        name: "Spacious 2BHK Apartment",
-        category: "Apartment",
-        price: 200000,
-        location: "Dhaka, Bangladesh",
-        postedDate: "2023-10-15",
-    },
-    {
-        id: 2,
-        name: "Modern Studio in the City",
-        category: "Studio",
-        price: 150000,
-        location: "Chittagong, Bangladesh",
-        postedDate: "2023-09-22",
-    },
-    {
-        id: 3,
-        name: "Luxury Villa with Garden",
-        category: "Villa",
-        price: 500000,
-        location: "Sylhet, Bangladesh",
-        postedDate: "2023-10-05",
-    },
-    {
-        id: 4,
-        name: "Cozy 1BHK for Rent",
-        category: "Apartment",
-        price: 80000,
-        location: "Rajshahi, Bangladesh",
-        postedDate: "2023-08-30",
-    }
-];
+
 
 const MyProperties = () => {
+
+    const {user} = useAuth();
+    const [MyProperties, setMyProperties] = useState(null);
+    
+    
+    useEffect(()=> {
+        fetch(`http://localhost:3000/properties?email=${user.email}`)
+        .then(res=> res.json())
+        .then(data=> {
+            setMyProperties(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, [user.email])
+    
+
+    if(MyProperties === null){
+        return <Loader></Loader>;
+    }
 
     const handleRemove = () => {
         Swal.fire({
@@ -67,26 +56,36 @@ const MyProperties = () => {
                 <p className="text-sm text-gray-500">View, update, or delete your properties as needed</p>
             </div>
 
-            <div className="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
-                    fakeProperties.map((property) => (
-                    <div key={property.id} className="bg-white rounded-lg shadow-lg p-3 transition-transform transform hover:scale-105 hover:shadow-2xl">
-                        <h3 className="text-xl font-semibold text-gray-800">{property.name}</h3>
-                        <p className="text-sm text-gray-600">{property.category}</p>
-                        <p className="mt-2 text-lg font-bold text-green-600">${property.price}</p>
-                        <p className="text-sm text-gray-500">{property.location}</p>
-                        <p className="text-xs text-gray-400 mt-1">{new Date(property.postedDate).toLocaleDateString()}</p>
+                    MyProperties.length !== 0 ?
 
-                        <div className="flex justify-between items-center mt-4">
-                            <Link to={`/details/${property.id}`} className="btn btn-sm  btn-secondary text-white hover:underline text-sm">View Details</Link>
+                    <>
+                    {
+                        MyProperties.map((property) => (
+                        <div key={property._id} className="bg-white rounded-lg shadow-lg p-3 transition-transform transform hover:scale-105 hover:shadow-2xl">
+                            <h3 className="text-xl font-semibold text-gray-800">{property.name}</h3>
+                            <p className="text-sm text-gray-600">{property.propertyType}</p>
+                            <p className="mt-2 text-lg font-bold text-green-600">${property.price}</p>
+                            <p className="text-sm text-gray-500">{property.location}</p>
+                            <p className="text-xs text-gray-400 mt-1">{new Date(property.createdAt).toLocaleDateString()}</p>
 
-                            <div className="flex space-x-2">
-                                <Link to={`/update/${property.id}`} className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</Link>
-                                <button onClick={handleRemove} className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
+                            <div className="flex justify-between items-center mt-4">
+                                <Link to={`/details/${property._id}`} className="btn btn-sm  btn-secondary text-white hover:underline text-sm">View Details</Link>
+
+                                <div className="flex space-x-2">
+                                    <Link to={`/update/${property._id}`} className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</Link>
+                                    <button onClick={handleRemove} className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
+                                </div>
                             </div>
                         </div>
+                        ))
+                    }
+                    </>
+                    :
+                    <div className="grid col-span-1 md:col-span-2 lg:col-span-3">
+                        <h1 className="text-3xl text-center font-medium">You have no properties.</h1>
                     </div>
-                    ))
                 }
             </div>
         </div>
