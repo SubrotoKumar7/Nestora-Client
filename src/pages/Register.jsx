@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const Register = () => {
 
-    const { createUser, loginWithGoogle, updateInfo } = useAuth();
+    const { createUser, loginWithGoogle, updateInfo, setLoading } = useAuth();
 
     const location = useLocation();
 
@@ -28,6 +28,12 @@ const Register = () => {
             photoURL
         };
 
+        const userInfo = {
+            displayName,
+            photoURL,
+            email
+        }
+
          // password validation
         if (!/(?=.*[A-Z])/.test(password)) {
             setError('Password must contain at least one uppercase letter');
@@ -47,10 +53,26 @@ const Register = () => {
         .then(() => {
             updateInfo(info)
             .then(()=> {
-                e.target.reset();
-                setError('');
-                toast.success("Account created successful");
-                navigate(`${location.state ? location.state : '/'}`);
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                .then(res=> res.json())
+                .then((data)=> {
+                    if(data.insertedId){
+                        setLoading(false);
+                        e.target.reset();
+                        setError('');
+                        toast.success("Account created successful");
+                        navigate(`${location.state ? location.state : '/'}`);
+                    }
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
             })
             .catch(err => {
                 setError(err.message);

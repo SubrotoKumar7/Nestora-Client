@@ -40,15 +40,17 @@ const AddProperty = () => {
             },
             body: JSON.stringify(formData)
         })
-        .then((res)=> {
-            console.log(res);
-            Swal.fire({
-            position: "top",
-            icon: "success",
-            title: "Your property has been saved",
-            showConfirmButton: false,
-            timer: 1500
-            });
+        .then(res=> res.json())
+        .then((data)=> {
+            if(data.insertedId){
+                Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Your property has been saved",
+                showConfirmButton: false,
+                timer: 1500
+                });
+            }
         })
         .catch(err => {
             console.log(err.message);
