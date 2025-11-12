@@ -19,7 +19,7 @@ const AddProperty = () => {
         price: "",
         agentImage: user.photoURL,
         agentName: user.displayName,
-        email: user.email,
+        agentEmail: user.email,
         contact: "",
         description: "",
         createdAt: date
@@ -222,7 +222,7 @@ const AddProperty = () => {
                         <label className="block font-medium mb-1">Email</label>
                         <input
                             type="email"
-                            name="email"
+                            name="agentEmail"
                             defaultValue={user?.email}
                             readOnly
                             onChange={handleChange}
