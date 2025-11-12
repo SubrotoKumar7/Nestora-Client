@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const UpdateProperty = () => {
 
+    const {user} = useAuth();
+    const {id} = useParams();
+    const navigate = useNavigate();
+
+    
+    useEffect(()=> {
+        fetch(`http://localhost:3000/properties/${id}`)
+        .then(res=> res.json())
+        .then(data=> {
+            setFormData(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, [id])
+
+
     const [formData, setFormData] = useState({
-        title: "",
-        category: "",
-        imageUrl: "",
-        propertyType: "",
-        buildYear: "",
-        location: "",
-        furnishing: "",
-        price: "",
-        agentImage: "",
-        agentName: "",
-        email: "",
-        contact: "",
-        description: "",
-    });
+            name: "",
+            category: "",
+            imageUrl: "",
+            propertyType: "",
+            buildYear: "",
+            location: "",
+            furnishing: "",
+            price: "",
+            agentImage: user.photoURL,
+            agentName: user.displayName,
+            agentEmail: user.email,
+            agentContact: "",
+            description: "",
+            status: "Available"
+        });
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +46,30 @@ const UpdateProperty = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Property Data:", formData);
+
+        fetch(`http://localhost:3000/properties/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            if(data.modifiedCount){
+                Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Your property has been update",
+                showConfirmButton: false,
+                timer: 1500
+                });
+                navigate(`/details/${id}`)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
     };
     
 
@@ -44,8 +88,8 @@ const UpdateProperty = () => {
                         <label className="block text-sm font-medium text-gray-700 mb-2">Property Title</label>
                         <input
                         type="text"
-                        name="title"
-                        value={formData.title}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Luxury Apartment in Dhaka"
                         className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -180,6 +224,7 @@ const UpdateProperty = () => {
                         <input
                             type="text"
                             name="agentName"
+                            readOnly
                             value={formData.agentName}
                             onChange={handleChange}
                             placeholder="e.g. Rishi Kumar"
@@ -188,11 +233,12 @@ const UpdateProperty = () => {
                         />
                         </div>
                         <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Agent Email</label>
                         <input
                             type="email"
-                            name="email"
-                            value={formData.email}
+                            name="agentEmail"
+                            readOnly
+                            value={formData.agentEmail}
                             onChange={handleChange}
                             placeholder="e.g. rishi@gmail.com"
                             className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -205,8 +251,8 @@ const UpdateProperty = () => {
                         <label className="block text-sm font-medium text-gray-700 mb-2">Contact Number</label>
                         <input
                         type="tel"
-                        name="contact"
-                        value={formData.contact}
+                        name="agentContact"
+                        value={formData.agentContact}
                         onChange={handleChange}
                         placeholder="e.g. +8801XXXXXXXXX"
                         className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
