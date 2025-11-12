@@ -9,7 +9,7 @@ const AddProperty = () => {
     const date = new Date();
 
     const [formData, setFormData] = useState({
-        title: "",
+        name: "",
         category: "",
         imageUrl: "",
         propertyType: "",
@@ -17,9 +17,9 @@ const AddProperty = () => {
         location: "",
         furnishing: "",
         price: "",
-        agentImage: "",
-        agentName: "",
-        email: "",
+        agentImage: user.photoURL,
+        agentName: user.displayName,
+        email: user.email,
         contact: "",
         description: "",
         createdAt: date
@@ -32,7 +32,6 @@ const AddProperty = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         fetch('http://localhost:3000/properties', {
             method: "POST",
             headers: {
@@ -74,8 +73,8 @@ const AddProperty = () => {
                         <label className="block font-medium mb-1">Property Title</label>
                         <input
                         type="text"
-                        name="title"
-                        value={formData.title}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Luxury Apartment in Dhaka"
                         className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -197,8 +196,8 @@ const AddProperty = () => {
                         <input
                         type="text"
                         name="agentImage"
-                        // value={formData.agentImage}
-                        value={user?.photoURL}
+                        defaultValue={user.photoURL}
+                        readOnly
                         onChange={handleChange}
                         placeholder="https://example.com/agent.jpg"
                         className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -211,8 +210,8 @@ const AddProperty = () => {
                         <input
                             type="text"
                             name="agentName"
-                            // value={formData.agentName}
-                            value={user?.displayName}
+                            defaultValue={user?.displayName}
+                            readOnly
                             onChange={handleChange}
                             placeholder="e.g. Rishi Kumar"
                             className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -224,8 +223,8 @@ const AddProperty = () => {
                         <input
                             type="email"
                             name="email"
-                            // value={formData.email}
                             defaultValue={user?.email}
+                            readOnly
                             onChange={handleChange}
                             placeholder="e.g. rishi@gmail.com"
                             className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
