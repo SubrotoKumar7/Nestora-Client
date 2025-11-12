@@ -30,7 +30,7 @@ const Details = () => {
             <div className='my-10'>
                 <h1 className='text-2xl font-bold my-5'>Agent Information</h1>
                 <div className='flex gap-3 '>
-                    <img src={agentImage} alt={agentName + ' images'} />
+                    <img className='w-30 h-30' src={agentImage} alt={agentName + ' images'} />
                     <div>
                         <h2 className='text-lg font-medium'>{agentName}</h2>
                         <p><strong>Email:</strong> {agentEmail}</p>
