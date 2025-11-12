@@ -28,7 +28,8 @@ const MyProperties = () => {
         return <Loader></Loader>;
     }
 
-    const handleRemove = () => {
+
+    const handleRemove = (id) => {
         Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -39,11 +40,27 @@ const MyProperties = () => {
         confirmButtonText: "Yes, delete it!"
         }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-            });
+            fetch(`http://localhost:3000/properties/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+            .then(res=> res.json())
+            .then(data => {
+                if(data.deletedCount){
+                    const remaining = MyProperties.filter(data => data._id !== id);
+                    setMyProperties(remaining);
+                    Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                    });
+                }
+            })
+            .catch(err=> {
+                console.log(err);
+            })
         }
         });
     }
@@ -75,7 +92,7 @@ const MyProperties = () => {
 
                                 <div className="flex space-x-2">
                                     <Link to={`/update/${property._id}`} className="hover:cursor-pointer border p-1 rounded text-yellow-500 hover:text-yellow-400 text-sm">Update</Link>
-                                    <button onClick={handleRemove} className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
+                                    <button onClick={()=> handleRemove(property._id)} className="hover:cursor-pointer border p-1 rounded text-red-500 hover:text-red-400 text-sm">Delete</button>
                                 </div>
                             </div>
                         </div>
