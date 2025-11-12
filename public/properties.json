@@ -91,7 +91,7 @@
         "agentImage": "https://randomuser.me/api/portraits/men/21.jpg",
         "yearBuilt": 2023,
         "furnishing": "Semi-Furnished",
-        "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
+        "image": "https://www.shutterstock.com/image-illustration/modern-house-terrace-swimming-pool-600nw-1513007366.jpg",
         "createdAt": "2025-11-04T08:30:00Z"
     },
     {
@@ -110,7 +110,7 @@
         "agentImage": "https://randomuser.me/api/portraits/women/56.jpg",
         "yearBuilt": 2021,
         "furnishing": "Fully Furnished",
-        "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
+        "image": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325006142/original/915047CHP_1717512400.jpg",
         "createdAt": "2025-11-03T12:10:00Z"
     },
     {
@@ -167,7 +167,7 @@
         "agentImage": "https://randomuser.me/api/portraits/men/11.jpg",
         "yearBuilt": 2020,
         "furnishing": "Semi-Furnished",
-        "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
+        "image": "https://cdn.buildofy.com/projects/443731c2-e5e5-4b3e-a212-9ae14ace0dc9.jpeg",
         "createdAt": "2025-10-31T11:30:00Z"
     },
     {
@@ -186,7 +186,7 @@
         "agentImage": "https://randomuser.me/api/portraits/women/68.jpg",
         "yearBuilt": 2023,
         "furnishing": "Fully Furnished",
-        "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+        "image": "https://www.thehousedesigners.com/images/plans/01/MHD/bulk/2009/untitled-design_m.webp",
         "createdAt": "2025-10-30T15:20:00Z"
     }
 ]

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const AddProperty = () => {
+    
+    const {user} = useAuth();
+
+    const date = new Date();
 
     const [formData, setFormData] = useState({
         title: "",
@@ -16,6 +22,7 @@ const AddProperty = () => {
         email: "",
         contact: "",
         description: "",
+        createdAt: date
     });
     
     const handleChange = (e) => {
@@ -25,7 +32,27 @@ const AddProperty = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Property Data:", formData);
+        
+        fetch('http://localhost:3000/properties', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then((res)=> {
+            console.log(res);
+            Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Your property has been saved",
+            showConfirmButton: false,
+            timer: 1500
+            });
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
     };
     
 
@@ -168,7 +195,8 @@ const AddProperty = () => {
                         <input
                         type="text"
                         name="agentImage"
-                        value={formData.agentImage}
+                        // value={formData.agentImage}
+                        value={user?.photoURL}
                         onChange={handleChange}
                         placeholder="https://example.com/agent.jpg"
                         className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -181,7 +209,8 @@ const AddProperty = () => {
                         <input
                             type="text"
                             name="agentName"
-                            value={formData.agentName}
+                            // value={formData.agentName}
+                            value={user?.displayName}
                             onChange={handleChange}
                             placeholder="e.g. Rishi Kumar"
                             className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -193,7 +222,8 @@ const AddProperty = () => {
                         <input
                             type="email"
                             name="email"
-                            value={formData.email}
+                            // value={formData.email}
+                            defaultValue={user?.email}
                             onChange={handleChange}
                             placeholder="e.g. rishi@gmail.com"
                             className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -233,7 +263,7 @@ const AddProperty = () => {
                     <div className="text-center pt-4">
                         <button
                         type="submit"
-                        className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+                        className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all hover:cursor-pointer"
                         >
                         Post Property
                         </button>
