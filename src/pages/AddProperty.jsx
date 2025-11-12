@@ -20,9 +20,10 @@ const AddProperty = () => {
         agentImage: user.photoURL,
         agentName: user.displayName,
         agentEmail: user.email,
-        contact: "",
+        agentContact: "",
         description: "",
-        createdAt: date
+        createdAt: date,
+        status: "Available"
     });
     
     const handleChange = (e) => {
