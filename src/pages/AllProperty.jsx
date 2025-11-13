@@ -12,7 +12,6 @@ const AllProperty = () => {
         property.name.toLowerCase().includes(search.toLowerCase()) ||
         property.description.toLowerCase().includes(search.toLowerCase())
     );
-    const reset = () => { setSearch('');  };
 
     return (
         <div className='w-11/12 mx-auto sec-gap'>
