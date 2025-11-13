@@ -10,7 +10,7 @@ const MyProperties = () => {
 
   useEffect(() => {
     fetch(
-      `https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/properties?email=${user.email}`
+      `https://nestora-server-api.vercel.app/properties?email=${user.email}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -36,15 +36,12 @@ const MyProperties = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/properties/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "content-type": "application/json",
-            },
-          }
-        )
+        fetch(`https://nestora-server-api.vercel.app/properties/${id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {

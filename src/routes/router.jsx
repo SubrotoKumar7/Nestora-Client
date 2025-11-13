@@ -22,17 +22,12 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
         loader: () =>
-          fetch(
-            "https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/latest-properties"
-          ),
+          fetch("https://nestora-server-api.vercel.app/latest-properties"),
         hydrateFallbackElement: <Loader></Loader>,
       },
       {
         path: "all-property",
-        loader: () =>
-          fetch(
-            "https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/properties"
-          ),
+        loader: () => fetch("https://nestora-server-api.vercel.app/properties"),
         hydrateFallbackElement: <Loader></Loader>,
         Component: AllProperty,
       },
@@ -56,7 +51,7 @@ const router = createBrowserRouter([
         path: "details/:id",
         loader: ({ params }) =>
           fetch(
-            `https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/properties/${params.id}`
+            `https://nestora-server-api.vercel.app/properties/${params.id}`
           ),
         hydrateFallbackElement: <Loader></Loader>,
         element: (

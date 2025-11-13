@@ -32,16 +32,13 @@ const AddProperty = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(
-      "https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/properties",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    )
+    fetch("https://nestora-server-api.vercel.app/properties", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

@@ -51,16 +51,13 @@ const Register = () => {
       .then(() => {
         updateInfo(info)
           .then(() => {
-            fetch(
-              "https://nestora-server-d3tjq901g-subroto-kumars-projects.vercel.app/users",
-              {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(userInfo),
-              }
-            )
+            fetch("https://nestora-server-api.vercel.app/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(userInfo),
+            })
               .then((res) => res.json())
               .then((data) => {
                 if (data.insertedId) {
