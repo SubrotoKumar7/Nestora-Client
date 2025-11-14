@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import Card from '../components/Card';
-import { FiRefreshCw } from 'react-icons/fi';
 
 const AllProperty = () => {
     const propertiesData = useLoaderData();

@@ -18,7 +18,7 @@ const Card = ({property}) => {
                 <p className='flex items-center gap-2'><TbCurrencyTaka className='text-xl' /> {price}</p>
                 <p className='flex items-center gap-2'><FaLocationDot /> {location}</p>
                 <p className='flex items-center gap-2'><FaCalendarAlt /> {createdAt}</p>
-                <p>{description.slice(0, 70)} ...</p>
+                <p>{description && description.length > 70 ? description.slice(0, 70) + "..." : description}</p>
                 <Link className='btn btn-primary w-full' to={`/details/${_id}`}>Learn More</Link>
             </div>
         </div>
