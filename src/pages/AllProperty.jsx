@@ -32,14 +32,14 @@ const AllProperty = () => {
                 <h1 className='heading font-heading'>Explore Exclusive Real Estate Listings</h1>
                 <p>Handpicked properties with premium amenities, modern architecture, and unbeatable locations — find your next investment today.</p>
             </div>
-            <div className="flex flex-col md:flex-row justify-between items-center gap-5">
+            <div className="flex flex-row justify-between items-center gap-5">
                 <div>
                     <input
-                        type="text"
+                        type="search"
                         placeholder="Search Properties ....."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-[80%] mx-auto sm:w-62 md:w-86 px-6 py-2 pr-10 rounded border border-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
+                        className="w-[60%] mx-auto sm:w-62 md:w-86 px-6 py-2 pr-2 rounded border border-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
                     />                    
                 </div>
                 <fieldset className="fieldset">
@@ -51,8 +51,17 @@ const AllProperty = () => {
                 </fieldset>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7'>
-                {                    
+                {/* {                    
                     properties.map(property => <Card key={property._id} property={property}></Card>)
+                } */}
+                {
+                    properties.length > 0 ? (
+                        properties.map(property => <Card key={property._id} property={property} />)
+                    ) : (
+                        <div className="col-span-full my-[10vh] text-center text-3xl font-bold">
+                            No Properties Found
+                        </div>
+                    )
                 }
             </div>
         </div>
