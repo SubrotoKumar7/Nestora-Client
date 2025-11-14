@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import Loader from "../components/Loader";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const MyProperties = () => {
   const { user } = useAuth();
@@ -83,8 +84,8 @@ const MyProperties = () => {
                   {property.name}
                 </h3>
                 <p className="text-sm text-gray-600">{property.propertyType}</p>
-                <p className="mt-2 text-lg font-bold text-green-600">
-                  ${property.price}
+                <p className="mt-2 text-lg font-bold text-green-600 flex items-center">
+                  <TbCurrencyTaka className='text-xl' />  {property.price}
                 </p>
                 <p className="text-sm text-gray-500">{property.location}</p>
                 <p className="text-xs text-gray-400 mt-1">

@@ -29,6 +29,13 @@ const MyRatings = () => {
             </div>
             <div className='mt-5 grid grid-cols-1 gap-7'>
                 {
+                    review.length === 0 ?
+                    (
+                        <div className="col-span-full my-[10vh] text-center text-3xl font-bold">
+                            No Rating yet
+                        </div>
+                    )
+                    :
                     review.map((data, i)=> <RatingCard key={i} data={data}></RatingCard>)
                 }
                     
