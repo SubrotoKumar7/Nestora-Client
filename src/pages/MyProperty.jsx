@@ -120,7 +120,7 @@ const MyProperties = () => {
           </>
         ) : (
           <div className="grid col-span-1 md:col-span-2 lg:col-span-3">
-            <h1 className="text-3xl text-center font-medium">
+            <h1 className="text-3xl font-semibold text-center">
               You have no properties.
             </h1>
           </div>
