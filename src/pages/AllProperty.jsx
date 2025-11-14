@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import Card from '../components/Card';
 
 const AllProperty = () => {
     const propertiesData = useLoaderData();
     const [search, setSearch] = useState('');
+    const [properties, setProperties] = useState(propertiesData);
 
+    useEffect(()=> {
+        const filterProperty = propertiesData && propertiesData.length > 0
+            ? propertiesData.filter((property) =>
+                (property.name && property.name.toLowerCase().includes(search.toLowerCase().trim())) ||
+                (property.description && property.description.toLowerCase().includes(search.toLowerCase().trim()))
+            )
+            : [];
+        setProperties(filterProperty);
+    }, [propertiesData, search])
 
-    const filterProperty = propertiesData.filter((property) =>
-        property.name.toLowerCase().includes(search.toLowerCase()) ||
-        property.description.toLowerCase().includes(search.toLowerCase())
-    );
 
     return (
         <div className='w-11/12 mx-auto sec-gap'>
@@ -32,7 +38,7 @@ const AllProperty = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7'>
                 {
                     
-                    filterProperty.map(property => <Card key={property._id} property={property}></Card>)
+                    properties.map(property => <Card key={property._id} property={property}></Card>)
                 }
             </div>
         </div>
