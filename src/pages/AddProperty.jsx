@@ -10,7 +10,7 @@ const AddProperty = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
-    imageUrl: "",
+    image: "",
     propertyType: "",
     buildYear: "",
     location: "",
@@ -32,12 +32,20 @@ const AddProperty = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const updatedFormData = {
+      ...formData,
+      price: Number(formData.price),
+      buildYear: Number(formData.buildYear)
+    };
+
+    
     fetch("https://nestora-server-api.vercel.app/properties", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedFormData),
     })
       .then((res) => res.json())
       .then((data) => {

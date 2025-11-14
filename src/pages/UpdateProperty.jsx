@@ -22,7 +22,7 @@ const UpdateProperty = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
-    imageUrl: "",
+    image: "",
     propertyType: "",
     buildYear: "",
     location: "",
@@ -44,12 +44,18 @@ const UpdateProperty = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+  const updatedFormData = {
+    ...formData,
+    price: Number(formData.price),
+    buildYear: Number(formData.buildYear)
+  };
+
     fetch(`https://nestora-server-api.vercel.app/properties/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedFormData),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -124,7 +130,7 @@ const UpdateProperty = () => {
               <input
                 type="text"
                 name="imageUrl"
-                value={formData.imageUrl}
+                value={formData.image}
                 onChange={handleChange}
                 placeholder="https://example.com/property.jpg"
                 className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
