@@ -76,11 +76,11 @@ const router = createBrowserRouter([
           </Private>
         ),
       },
+      {
+        path: "*",
+        Component: NotFound,
+      }
     ],
-  },
-  {
-    path: "*",
-    Component: NotFound,
   },
   {
     path: "login",
