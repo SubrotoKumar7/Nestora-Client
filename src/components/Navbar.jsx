@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 import MiniLoader from './MiniLoader';
 
 const Navbar = () => {
-    const [isScroll, setIsScroll] = useState(false);
-    const [isHome, setIsHome] = useState(true);
-    const location = useLocation();
 
     const {user, logOutUser, loading} = useAuth();
 
@@ -21,25 +17,6 @@ const Navbar = () => {
         })
     }
 
-    useEffect(()=> {
-        const pathname = location.pathname;
-        if(pathname === '/'){
-            setIsHome(true);
-        }else{
-            setIsHome(false);
-        }
-    }, [location]);
-
-    useEffect(()=> {
-        window.addEventListener('scroll', ()=> {
-            const scroll = window.scrollY;
-            if(scroll > 0){
-                setIsScroll(true);
-            }else{
-                setIsScroll(false);
-            }
-        })
-    }, [isScroll])
 
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
@@ -54,7 +31,8 @@ const Navbar = () => {
         }
     </>
     return (
-        <nav className={`${isHome ? 'fixed top-0 left-0 w-full z-50 text-white' : 'static text-black'} py-2 shadow-sm ${isScroll ? 'bg-base-100 text-black!' : 'bg-transparent'}`}>
+        // <nav className={`${isHome ? 'fixed top-0 left-0 w-full z-50 text-white' : 'static text-black'} py-2 shadow-sm ${isScroll ? 'bg-base-100 text-black!' : 'bg-transparent'}`}>
+        <nav className='bg-base-100 py-1 sticky top-0 z-30'>
             <div className="w-11/12 mx-auto navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -63,7 +41,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className={`menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ${scroll && 'text-black'}`}>
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                     </div>
@@ -88,7 +66,7 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex="-1"
-                                className={`${scroll && 'text-black'} text-center menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow`}>
+                                className="text-center menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                                 <li className='font-semibold py-1'>{user?.displayName}</li>
                                 <li className='pb-3 italic'>{user?.email}</li>
                                 <li><button className='btn btn-secondary' onClick={handleLogout}>Logout</button></li>
