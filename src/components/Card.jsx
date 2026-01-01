@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 const Card = ({property}) => {
     const {_id, category, createdAt, description, image, location, name, price} = property;
     return (
-        <div className='p-2 bg-white shadow-2xl rounded hover:scale-105'>
+        <div className='p-2 bg-base-100 shadow-2xl rounded hover:scale-105'>
             <img src={image} className='w-full md:h-[300px] h-[200px] object-cover' alt="property images" />
             <div className='mt-3 space-y-2'>
                 <h1 className='text-center font-semibold text-2xl'>{name}</h1>

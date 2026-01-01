@@ -37,7 +37,7 @@ const ChooseUs = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
                 {
                     features.map((features, index) => 
-                    <div key={index} className="bg-white grid place-items-center p-10 shadow-2xl rounded text-center">
+                    <div key={index} className="bg-base-100 grid place-items-center p-10 shadow-2xl rounded text-center">
                         <img src={features.icon} alt="icon" />
                         <h1 className="font-semibold text-2xl">{features.title}</h1>
                         <p>{features.description}</p>

@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 const Root = () => {
     const navigation = useNavigation();
     return (
-        <div className='bg-base-100 relative flex flex-col justify-between min-h-screen'>
+        <div className='bg-base-300 relative flex flex-col justify-between min-h-screen'>
             <Navbar></Navbar>
             {
                 navigation.state === 'loading' ?
