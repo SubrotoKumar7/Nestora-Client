@@ -94,8 +94,8 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen grid place-items-center">
-      <div className="card-body w-fit md:w-[400px] bg-white py-4 px-7 shadow-2xl rounded text-primary">
+    <div className="h-screen grid place-items-center bg-base-300">
+      <div className="card-body w-fit md:w-[400px] bg-base-100 py-4 px-7 shadow-2xl rounded">
         <h1 className="text-3xl text-center mb-4 font-semibold">
           Register Now
         </h1>
@@ -163,7 +163,7 @@ const Register = () => {
             {/* Google */}
             <button
               onClick={handleGoogle}
-              className="btn bg-white text-secondary border-[#e5e5e5]"
+              className="btn w-full border-[#e5e5e5]"
             >
               <svg
                 aria-label="Google logo"
