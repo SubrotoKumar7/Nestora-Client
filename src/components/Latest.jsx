@@ -7,8 +7,8 @@ const Latest = ({propertiesData}) => {
     return (
         <div className='sec-gap w-11/12 mx-auto'>
             <div className='text-center space-y-2 mb-10'>
-                <h1 className='heading text-primary'>Featured Real Estates</h1>
-                <p className='text-secondary mt-3'>Explore the latest properties added this week</p>
+                <h1 className='heading'>Featured Real Estates</h1>
+                <p className='mt-3'>Explore the latest properties added this week</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
                 {

@@ -4,7 +4,7 @@ const ReviewCard = ({ data }) => {
     const { reviewerName, reviewerEmail, photoURL, productRating, review } = data;
 
     return (
-        <div className="w-full rounded overflow-hidden shadow-lg p-4 bg-white hover:shadow-2xl duration-300">
+        <div className="w-full rounded overflow-hidden shadow-lg p-4 bg-base-100 hover:shadow-2xl duration-300">
             <div className="flex items-center space-x-4">
                 <img
                 src={photoURL}

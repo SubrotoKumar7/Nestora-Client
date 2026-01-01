@@ -65,7 +65,7 @@ const AddProperty = () => {
   };
 
   return (
-    <div className="sec-gap  bg-gray-100">
+    <div className="sec-gap">
       <div className="text-center space-y-2 mb-10">
         <h1 className="heading font-heading">Sell or Rent Faster!</h1>
         <p>
@@ -74,7 +74,7 @@ const AddProperty = () => {
         </p>
       </div>
       <div className="w-11/12 mx-auto min-h-scree flex justify-center items-start py-10">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+        <div className="bg-base-100 p-8 rounded-lg shadow-lg w-full max-w-3xl">
           <h2 className="text-2xl font-bold text-center mb-6">
             🏠 Add New Property
           </h2>
