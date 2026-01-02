@@ -57,15 +57,20 @@ const Details = () => {
   const [review, setReview] = useState("");
 
   const ratingInfo = {
-    reviewerName: user.displayName,
-    reviewerEmail: user.email,
-    photoURL: user.photoURL,
+    reviewerName: user?.displayName,
+    reviewerEmail: user?.email,
+    photoURL: user?.photoURL,
     productRating,
     review,
     productId,
   };
 
+
   const handleReviewSubmit = (e) => {
+    if(!user){
+      return toast.warn("You must be logged in before you can comment.");
+    }
+
     e.preventDefault();
     if (!productRating) {
       return toast.warn("Please fill the rate star");
@@ -98,6 +103,16 @@ const Details = () => {
         }
       });
   };
+
+
+  const handleBuy = () => {
+    if(!user){
+      return toast.warn("You need to login before buying a property.");
+    }
+
+    toast.success("Buy Successful");
+  }
+
 
   return (
     <div className="w-11/12 mx-auto sec-gap">
@@ -137,7 +152,7 @@ const Details = () => {
             <strong>Date:</strong> {createdAt}
           </p>
           <p>
-            <button className="btn btn-primary">Buy Properties</button>
+            <button onClick={()=> handleBuy()} className="btn btn-primary">Buy Properties</button>
           </p>
         </div>
       </div>

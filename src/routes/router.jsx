@@ -54,11 +54,7 @@ const router = createBrowserRouter([
             `https://nestora-server-api.vercel.app/properties/${params.id}`
           ),
         hydrateFallbackElement: <Loader></Loader>,
-        element: (
-          <Private>
-            <Details></Details>
-          </Private>
-        ),
+        element: <Details></Details>
       },
       {
         path: "my-property",
