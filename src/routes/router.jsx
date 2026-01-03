@@ -15,6 +15,8 @@ import Loader from "../components/Loader";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardHome from "../pages/DashboardHome";
 import AboutUs from '../pages/AboutUs';
+import Services from '../pages/Services';
+
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: 'about-us',
         Component: AboutUs
+      },
+      {
+        path: 'services',
+        Component: Services
       },
       {
         path: "*",
