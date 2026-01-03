@@ -12,6 +12,8 @@ import MyProperty from "../pages/MyProperty";
 import Private from "../private/Private";
 import UpdateProperty from "../pages/UpdateProperty";
 import Loader from "../components/Loader";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../pages/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -79,13 +81,23 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/dashboard',
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome></DashboardHome>
+      }
+    ]
+  },
+  {
     path: "login",
     Component: Login,
   },
   {
     path: "register",
     Component: Register,
-  },
+  }
 ]);
 
 export default router;
