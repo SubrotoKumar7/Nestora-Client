@@ -14,6 +14,7 @@ import UpdateProperty from "../pages/UpdateProperty";
 import Loader from "../components/Loader";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardHome from "../pages/DashboardHome";
+import AboutUs from '../pages/AboutUs';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             <UpdateProperty></UpdateProperty>
           </Private>
         ),
+      },
+      {
+        path: 'about-us',
+        Component: AboutUs
       },
       {
         path: "*",
