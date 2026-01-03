@@ -28,3 +28,7 @@
 .sec-gap{
     @apply py-15;
 }
+
+.active{
+    @apply bg-primary text-white;
+}
