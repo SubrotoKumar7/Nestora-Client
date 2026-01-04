@@ -29,8 +29,6 @@ const router = createBrowserRouter([
       },
       {
         path: "all-property",
-        loader: () => fetch("https://nestora-server-api.vercel.app/properties"),
-        hydrateFallbackElement: <Loader></Loader>,
         Component: AllProperty,
       },
       {

@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
 import Card from "../components/Card";
+import useAxios from "../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import CardSkeleton from "../components/skeletons/CardSkeletons";
 
 const AllProperty = () => {
-  const propertiesData = useLoaderData();
+  const axiosInstance = useAxios();
+  const {data: propertiesData = [], isLoading} = useQuery({
+    queryKey: ['all-property'],
+    queryFn: async()=> {
+      const res = await axiosInstance.get('/properties');
+      return res.data;
+    }
+  })
   const [search, setSearch] = useState("");
   const [properties, setProperties] = useState(propertiesData);
   const [sort, setSort] = useState("");
@@ -67,16 +76,18 @@ const AllProperty = () => {
           </select>
         </fieldset>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7">
-        {properties.length > 0 ? (
-          properties.map((property) => (
-            <Card key={property._id} property={property} />
-          ))
-        ) : (
-          <div className="col-span-full my-[10vh] text-center text-3xl font-semibold">
-            No Properties Found
-          </div>
-        )}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-7">
+        {isLoading
+          ? [...Array(8)].map((_, i) => <CardSkeleton key={i} />)
+          : properties.length > 0
+          ? properties.map((property) => (
+              <Card key={property._id} property={property} />
+            ))
+          : (
+              <div className="col-span-full my-[10vh] text-center text-3xl font-semibold">
+                No Properties Found
+              </div>
+            )}
       </div>
     </div>
   );
